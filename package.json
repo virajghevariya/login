@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
@@ -15,12 +16,13 @@
     "mongoose": "^5.12.5",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pusher": "^5.0.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "NODE_ENV=production node server",
-    "dev": "nodemon server"
+    "start": " node app",
+    "dev": "nodemon app"
   },
   "author": "",
   "license": "ISC"

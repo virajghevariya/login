@@ -1,5 +1,7 @@
+const path = require('path');
 const colors = require('colors');
 const express = require("express");
+const http = require('http');
 const dotenv = require("dotenv");
 const router = express.Router();
 const app = express();
@@ -13,6 +15,12 @@ require("./config/passport")(passport);
 
 // Load env var
 dotenv.config({ path: "./config/config.env" });
+
+const server = http.createServer(app);
+
+
+// // Set static folder
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to Database
 connectDB();
@@ -45,8 +53,9 @@ app.use((req, res, next) => {
   next();
 });
 
+
 //Routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 
-app.listen(3000,console.log(`Server is running in ${process.env.NODE_ENV} on port: ${process.env.PORT}`.blue.inverse));
+server.listen(3000,console.log(`Server is running in ${process.env.NODE_ENV} on port: ${process.env.PORT}`.blue.inverse));
