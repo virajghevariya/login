@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <div class="card mt-6">
+          <div class="card-content">
+            <div class="content">
+              <form action="/login" method="POST">
+                  <!-- Title -->
+                <h1 class="title">Login Form</h1>
+
+                <!-- Email -->
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left">
+                        <input type="email" class="input" name="email" placeholder="Email">
+                        <span class="icon is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left">
+                        <input type="password" class="input" name="password" placeholder="Password">
+                        <span class="icon is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Button -->
+
+                <div class="field is-grouped mt-5">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Login</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-light">Cancel</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
