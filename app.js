@@ -3,15 +3,14 @@ const colors = require('colors');
 const express = require("express");
 const http = require('http');
 const dotenv = require("dotenv");
-const router = express.Router();
+const router = require("./routes")
 const app = express();
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
-const expressEjsLayout = require("express-ejs-layouts");
 const session = require("express-session");
-const flash = require("connect-flash");
 const passport = require('passport');
 require("./config/passport")(passport);
+const hbs = require('hbs');
 
 // Load env var
 dotenv.config({ path: "./config/config.env" });
@@ -19,18 +18,22 @@ dotenv.config({ path: "./config/config.env" });
 const server = http.createServer(app);
 
 
-// // Set static folder
+// Set static folder
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to Database
 connectDB();
 
-//EJS
-app.set("view engine", "ejs");
-app.use(expressEjsLayout);
-
 //BodyParser
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//hbs
+app.use(express.static(path.join(__dirname, "public")));
+app.set("view engine", "hbs");
+app.set('views', path.join(__dirname, "/templates/views"));
+hbs.registerPartials(path.join(__dirname, "/templates/partials"));
+
 
 //express session
 app.use(
@@ -44,18 +47,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//use flash
-app.use(flash());
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  res.locals.error = req.flash("error");
-  next();
-});
-
 
 //Routes
 app.use("/", require("./routes/index"));
-app.use("/users", require("./routes/users"));
+app.use("/user", require("./routes/users"));
 
-server.listen(3000,console.log(`Server is running in ${process.env.NODE_ENV} on port: ${process.env.PORT}`.blue.inverse));
+const PORT = process.env.PORT || 5600
+
+server.listen(process.env.PORT, console.log(`Server is running in ${process.env.NODE_ENV} on port: ${process.env.PORT}`.blue.inverse));
