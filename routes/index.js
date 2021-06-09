@@ -1,41 +1,3 @@
-// const express = require("express");
-// const router = express.Router();
-// const { ensureAuthenticated } = require("../config/auth");
-// const passport = require('../config/passport');
-// //register page
-// router.get("/", (req, res) => {
-//   res.render("welcome");
-//   // const { name, email, password, confirmPassword } = req.body;
-//   // console.log(name, email, password, confirmPassword);
-//   // console.log(req.body.name, req.body.email, req.body.password, req.body.confirmPassword);
-// });
-
-// router.get("/register", (req, res) => {
-//   res.render("register");
-// });
-
-// router.post("/register",  async (req, res, next) => {
-//   console.log(req.body.name, req.body.email, req.body.password, req.body.confirmPassword);
-//   const { name, email, password, confirmPassword } = req.body;
-
-//   res.status(400).redirect("register");
-
-// //   console.log(name, email, password, confirmPassword);
-// //   passport.authenticate('local', {});
-
-// });
-
-// //login page
-// router.get("/login", (req, res) => {
-//   res.render("login");
-// });
-
-// router.post("/login", (req, res) => {
-//   res.render("login");
-// });
-
-// router.get("/dashboard", ensureAuthenticated, (req, res) => {});
-// module.exports = router;
 
 const express = require("express");
 const router = express.Router();
@@ -93,31 +55,35 @@ router.post("/register", (req, res) => {
           name,
           email,
           password,
-          // confirmPassword,
+          confirmPassword,
         });
+        
+        newUser.save().then((value) => {
+          console.log(value);
+          res.redirect('/login');
+        })
+        // //hash password
+        // bcrypt.genSalt(10, (err, salt) =>
+        //   bcrypt.hash(newUser.password, salt, (err, hash) => {
+        //     if (err) throw err;
+        //     //save passs to hash
+        //     newUser.password = hash;
+        //     newUser.confirmPassword = undefined;
+        //     //save user
+        //     newUser
+        //       .save()
+        //       .then((value) => {
+        //         console.log(value);
+        //         // req.flash("success_msg", "You have now registered!");
 
-        //hash password
-        bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            //save passs to hash
-            newUser.password = hash;
-            // newUser.confirmPassword = hash;
-            //save user
-            newUser
-              .save()
-              .then((value) => {
-                console.log(value);
-                // req.flash("success_msg", "You have now registered!");
-
-                // res
-                //   .status(200)
-                //   .send({ successs_msg: "You have now registered" });
-                res.redirect("/login");
-              })
-              .catch((value) => console.log(value));
-          })
-        );
+        //         // res
+        //         //   .status(200)
+        //         //   .send({ successs_msg: "You have now registered" });
+        //         res.redirect("/login");
+        //       })
+        //       .catch((value) => console.log(value));
+        //   })
+        // );
       }
     });
   }
@@ -129,13 +95,36 @@ router.get("/login", (req, res) => {
 });
 
 //Register handle
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", {    
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-  })(req, res, next);
-  res.render("login");
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const userEmail = await User.findOne({ email: email });
+
+    const isMatch = await bcrypt.compare(password, userEmail.password);
+    
+    if (isMatch) {
+      res.status(201).redirect('/chat');
+    }else {
+      res.status(400).send('invalid login details!@#');
+    }
+    
+    // res.send(userEmail);
+    // console.log(userEmail.password);
+
+  } catch (err) {
+    res.status(400).send('invalid login details');
+  }
+  // passport.authenticate("local", {    
+  //   successRedirect: "/",
+  //   failureRedirect: "/login",
+  //   failureFlash: true,
+  // })(req, res, next);
+  // res.render("login");
+});
+
+// chat 
+router.get("/chat", (req, res) => {
+  res.render("chat");
 });
 
 //logout
