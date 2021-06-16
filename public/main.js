@@ -1,23 +1,11 @@
 const socket = io();
 
-const User = require('../models/User');
-
 const totalClients = document.getElementById("clients-total");
 const messageContainer = document.getElementById("message-container");
 const messageForm = document.getElementById("message-form");
 const messageInput = document.getElementById("message-input");
 const nameInput = document.getElementById("name-input");
-const container = document.getElementById('container');
-
 // const button = document.getElementById('button');
-
-// function userName() {
-//     nameInput.value = User.name;
-//     console.log(nameInput);
-// }
-
-// userName();
-
 
 messageForm.addEventListener("submit", (e) => {
   e.preventDefault();
