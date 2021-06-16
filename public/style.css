@@ -1,0 +1,69 @@
+/* #box-right {
+ 
+} */
+
+/* #box-left {
+  width: 20%;
+  margin-right: 80%;
+  padding: 0px;
+  box-shadow: rgba(255, 255, 255, 0.1);
+} */
+
+#card {
+    margin: 5% 12%;
+    height: 60%;
+    width: 80%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  
+  #card > h1 {
+    text-align: center;
+  }
+  
+  #name-input {
+    border: none;
+    outline: none;
+    width: auto;
+    font-weight: 700;
+    background-color: #ebebeb;
+  }
+  
+  #message-left {
+    width: 20%;
+  }
+  
+  /* #message-left > p {
+    background-color: white;
+    color: black;
+    padding: 10px 10px 10px 10px;
+    overflow: hidden;
+  } */
+  
+  #message-right {
+    width: 20%;
+    margin-left: 80%;
+    padding: 0px;
+    box-shadow: rgba(255, 255, 255, 0.1);
+  }
+  
+  #message-right > p {
+    background-color: black;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    overflow: hidden;
+  }
+  
+  #message-feedback {
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  #message-form > div {
+    margin: 20% 0% 0% 0%
+  }
+  
+  #clients-total {
+    text-align: center
+  }
+  

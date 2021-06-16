@@ -20,7 +20,7 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 5600
 
-server.listen(process.env.PORT, console.log(`Server is running in ${process.env.NODE_ENV} on port: ${process.env.PORT}`.blue.inverse));
+server.listen(PORT, console.log(`Server is running in ${process.env.NODE_ENV} on port: ${process.env.PORT}`.blue.inverse));
 
 
 const io = require('socket.io')(server);
@@ -37,6 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //hbs
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/main.js")))
 app.set("view engine", "hbs");
 app.set('views', path.join(__dirname, "/templates/views"));
 hbs.registerPartials(path.join(__dirname, "/templates/partials"));

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <title>chatDashboard</title>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div
+        class="card"
+        id="card"
+      >
+        <h1 class="title">chatDashboard</h1>
+        <div class="card-content">
+          <div class="content">
+            <!-- User -->
+            <div class="field">
+              <div class="control has-icons-left">
+                <input
+                  type="text"
+                  class="input"
+                  id="name-input"
+                  value="anonymous"
+                />
+                <span class="icon is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+
+            <!-- Message Container -->
+            <ul class="message-container" id="message-container">
+              <!-- Message left -->
+              <li class="box" id="message-left">
+                <p class="message is-white">
+                  lorem ipsum 
+                  <br />
+                  <span> <strong>VD 🕐 26 May 10:40</strong></span>
+                </p>
+              </li>
+
+              <!-- Message Right -->
+              <li class="box" id="message-right">
+                <p class="message is-white">
+                  Lorem ipsum
+                  <br />
+                  <span> <strong>VD 🕐 26 May 10:40</strong></span>
+                </p>
+              </li>
+
+              <li class="message-feedback" id="message-feedback">
+                <p class="feedback"><typing class="type">🖋 Anony is typing...</typing></p>
+              </li>
+            </ul>
+
+            <!-- Message Form -->
+            <form class="message-form" id="message-form">
+              <!-- Message Box and Send Button -->
+              <div class="field is-grouped">
+                <p class="control is-expanded">
+                  <input
+                    type="text"
+                    class="input"
+                    id="message-input"
+                    placeholder="Message"
+                  />
+                </p>
+
+                <p class="control has-icons-right">
+                  <a class="button is-primary" id="button" type="submit"
+                    >Send
+                    <i class="fas fa-paper-plane"></i>
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <h3 class="title is-4" id="clients-total">
+        Total clients: 1
+      </h3>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
