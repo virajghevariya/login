@@ -5,6 +5,8 @@ const messageContainer = document.getElementById("message-container");
 const messageForm = document.getElementById("message-form");
 const messageInput = document.getElementById("message-input");
 const nameInput = document.getElementById("name-input");
+const userName = document.getElementById("name");
+
 // const button = document.getElementById('button');
 
 messageForm.addEventListener("submit", (e) => {
@@ -60,22 +62,22 @@ function scrollToBottom() {
 }
 
 messageInput.addEventListener("focus", (e) => {
-  socket.emit('feedback', {
+  socket.emit("feedback", {
     feedback: `🖋 ${nameInput.value} is typing...`,
   });
 });
 messageInput.addEventListener("keypress", (e) => {
-  socket.emit('feedback', {
+  socket.emit("feedback", {
     feedback: `🖋 ${nameInput.value} is typing...`,
   });
 });
 messageInput.addEventListener("blur", (e) => {
-  socket.emit('feedback', {
+  socket.emit("feedback", {
     feedback: "",
   });
 });
 
-socket.on('feedback', (data) => {
+socket.on("feedback", (data) => {
   clearFeedback();
   const elem = `
   <li class="message-feedback" id="message-feedback">
@@ -85,8 +87,26 @@ socket.on('feedback', (data) => {
   messageContainer.innerHTML += elem;
 });
 
-function clearFeedback () {
-  document.querySelectorAll("li.message-feedback").forEach(element => {
+function clearFeedback() {
+  document.querySelectorAll("li.message-feedback").forEach((element) => {
     element.parentNode.removeChild(element);
-  })
+  });
 }
+
+// function nameInputDisplay() {
+//   const name = `<div class="field">
+//   <div class="control has-icons-left">
+//     <input
+//       type="text"
+//       class="input"
+//       id="name-input"
+//       value=${userName.value}
+//     />
+//     <span class="icon is-left">
+//       <i class="fas fa-user"></i>
+//     </span>
+//   </div>
+// </div>`;
+
+//   nameInput.innerHTML += name;
+// }
